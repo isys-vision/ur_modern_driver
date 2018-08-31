@@ -385,14 +385,14 @@ bool LowBandwidthTrajectoryFollower::execute(std::vector<TrajectoryPoint> &traje
       finished = true;
       break;
     }
-    unsigned int message_num = atoi((const char *)line);
+    int message_num = atoi((const char *)line);
     if (message_num == -1) {
        LOG_DEBUG("Received success message");
        res = true;
        break;
     }
     LOG_DEBUG("Received request %i", message_num);
-    if (message_num < trajectory.size())
+    if (message_num < static_cast<int>(trajectory.size()))
     {
       res = execute(trajectory[message_num].positions, trajectory[message_num].velocities, message_num,
                     trajectory[message_num].time_from_start.count() / 1e6);
